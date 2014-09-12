@@ -14,7 +14,7 @@
 		body {
 			padding-top: 50px;
 			padding-bottom: 20px;
-			font-family: Open Sans;
+			font-family: 'Open Sans',sans-serif;
 		}
 		h1,
 		h2,
@@ -22,7 +22,7 @@
 		h4,
 		h5,
 		h6 {
-			font-family: Open Sans;
+			font-family: 'Open Sans',sans-serif;
 			font-weight: 300;
 		}
 		.products {
@@ -30,6 +30,18 @@
 		}
 		.prod-img {
 			width: 100%;
+		}
+		
+		.panel-plus {
+			background: #f1f1f1;
+			border: 1px dashed silver;
+			cursor: pointer;
+			text-align:center;
+		}
+		.panel-add-plus {
+			font-size: 120px;
+			color: silver;
+			margin: 150px 0;
 		}
 	</style>
 	<link rel="stylesheet" href="css/main.css">
@@ -53,6 +65,7 @@
 	<div class="container products" ng-controller="products-api">
 		<!-- Example row of columns -->
 		<div class="row">
+			<!-- Product panels -->
 			<div class="col-md-4 product" ng-repeat="product in products">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -70,6 +83,14 @@
 							<div class="btn btn-primary prod-amount-plus">+</div>
 						</div>
 
+					</div>
+				</div>
+			</div>
+			<!-- Add product panel -->
+			<div class="col-md-4 product">
+				<div class="panel panel-default panel-plus">
+					<div class="panel-body">
+						<span class="glyphicon glyphicon-plus panel-add-plus"></span>
 					</div>
 				</div>
 			</div>
