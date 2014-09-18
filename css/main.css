@@ -3,3 +3,56 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+	font-family: 'Open Sans',sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Open Sans',sans-serif;
+	font-weight: 300;
+}
+.products {
+	margin-top: 20px;
+}
+.prod-img {
+	width: 100%;
+}
+
+.panel-plus {
+	background: #f1f1f1;
+	border: 1px dashed silver;
+	cursor: pointer;
+	text-align:center;
+}
+.panel-add-plus {
+	font-size: 120px;
+	color: silver;
+	margin: 95px 0;
+	transition: all 0.25s;
+}
+
+.panel-plus:hover .panel-add-plus {
+	transition: all 0.25s;
+	transform: rotate(-90deg);
+}
+
+.total-price {
+	color: white;
+	padding: 1.2em;
+	font-weight: bold;
+}
+
+.total-price:before {
+	content: 'Totaal: ';
+	font-weight: normal;
+}
+
+input {
+	color: #333;
+}

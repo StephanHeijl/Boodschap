@@ -10,77 +10,51 @@
 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
-	<style>
-		body {
-			padding-top: 50px;
-			padding-bottom: 20px;
-			font-family: 'Open Sans',sans-serif;
-		}
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			font-family: 'Open Sans',sans-serif;
-			font-weight: 300;
-		}
-		.products {
-			margin-top: 20px;
-		}
-		.prod-img {
-			width: 100%;
-		}
-		
-		.panel-plus {
-			background: #f1f1f1;
-			border: 1px dashed silver;
-			cursor: pointer;
-			text-align:center;
-		}
-		.panel-add-plus {
-			font-size: 120px;
-			color: silver;
-			margin: 150px 0;
-		}
-	</style>
 	<link rel="stylesheet" href="css/main.css">
 
 	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
 	<!-- Angular -->
-	<script src="js/vendor/angular.min.js"></script>
-	<script src="js/controllers.js"></script>
+	<script src="js/vendor/angular.js"></script>
+	<script src="js/boodschap.js"></script>
 </head>
 
-<body>
+<body ng-controller="productsController">
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">Boodschap</a>
 			</div>
+			<span class="total-price pull-right">{{ sum }}€</span>
 		</div>
 	</div>
 
-	<div class="container products" ng-controller="products-api">
+	<div class="container products">
 		<!-- Example row of columns -->
 		<div class="row">
 			<!-- Product panels -->
 			<div class="col-md-4 product" ng-repeat="product in products">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Productnaam</h3>
+						<h3 class="panel-title" ng-if="product.name.length>0">{{ product.name }}</h3>
+						<h3 class="panel-title" ng-if="product.name.length==0"><input ng-model="product.name" style="width: 100%;" ng-model-onblur/></h3>
 					</div>
 					<div class="panel-body">
 						<img src="http://lorempixel.com/360/240/" class="prod-img" />
 						<br/>
 						<br/>
-						<div class="btn btn-primary prod-price">9,99€</div>
+						<div class="btn-group" ng-if="product.price>=0">
+							<div class="btn btn-primary prod-price">{{ product.price }}€</div>
+							<div class="btn btn-default prod-price-total" ng-if="product.amount>1">{{ product.price * product.amount }}€</div>
+						</div>
+						<div class="btn-group" ng-if="product.price<0">
+							<div class="btn btn-primary prod-price"><input ng-model="product.price" size=4 ng-model-onblur/>€</div>
+						</div>
 
 						<div class="btn-group pull-right">
-							<div class="btn btn-primary prod-amount-plus">-</div>
-							<div class="btn btn-primary prod-amount">1</div>
-							<div class="btn btn-primary prod-amount-plus">+</div>
+							<div class="btn btn-primary prod-amount-plus" ng-click="decrement(product)">-</div>
+							<div class="btn btn-primary prod-amount">{{ product.amount }}</div>
+							<div class="btn btn-primary prod-amount-plus" ng-click="increment(product)">+</div>
 						</div>
 
 					</div>
@@ -88,7 +62,7 @@
 			</div>
 			<!-- Add product panel -->
 			<div class="col-md-4 product">
-				<div class="panel panel-default panel-plus">
+				<div class="panel panel-default panel-plus" ng-click="products.push({'name':'','amount':1, 'price':-1})">
 					<div class="panel-body">
 						<span class="glyphicon glyphicon-plus panel-add-plus"></span>
 					</div>
