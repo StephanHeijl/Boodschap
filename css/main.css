@@ -1,5 +1,4 @@
 
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
@@ -24,22 +23,27 @@ h6 {
 	width: 100%;
 }
 
-.panel-plus {
+.panel-plus, .panel-list {
 	background: #f1f1f1;
 	border: 1px dashed silver;
 	cursor: pointer;
 	text-align:center;
 }
-.panel-add-plus {
+.panel-add-plus, .panel-list-list {
 	font-size: 120px;
 	color: silver;
 	margin: 95px 0;
-	transition: all 0.25s;
+	transition: all 0.5s;
 }
 
 .panel-plus:hover .panel-add-plus {
 	transition: all 0.25s;
 	transform: rotate(-90deg);
+}
+
+.panel-list:hover .panel-list-list {
+	transition: all 0.5s;
+	transform: rotateX(180deg);
 }
 
 .total-price {
@@ -55,4 +59,16 @@ h6 {
 
 input {
 	color: #333;
+}
+
+/* Animations */
+
+.animate-panel-enter {
+	-webkit-transition: 1s linear all; /* Chrome */
+	transition: 1s linear all;
+	opacity: 0;
+}
+
+.animate-panel-enter.animate-panel-enter-active {
+	opacity: 1;
 }

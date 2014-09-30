@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title></title>
+	<title>Boodschap</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,9 +13,12 @@
 	<link rel="stylesheet" href="css/main.css">
 
 	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 	<!-- Angular -->
 	<script src="js/vendor/angular.js"></script>
+	<script src="js/vendor/angular-cookies.min.js"></script>
+    <script src="js/vendor/angularLocalStorage.js"></script>
 	<script src="js/boodschap.js"></script>
 </head>
 
@@ -25,27 +28,27 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">Boodschap</a>
 			</div>
-			<span class="total-price pull-right">{{ sum }}€</span>
+			<span class="total-price pull-right">{{ sum | number : 2}}€</span>
 		</div>
 	</div>
 
 	<div class="container products">
 		<!-- Example row of columns -->
-		<div class="row">
+		<div class="row row-eq-height ">
 			<!-- Product panels -->
-			<div class="col-md-4 product" ng-repeat="product in products">
+			<div class="col-md-4 col-sm-6 product" ng-repeat="product in products" ng-animate=" 'animate-panel' ">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title" ng-if="product.name.length>0">{{ product.name }}</h3>
 						<h3 class="panel-title" ng-if="product.name.length==0"><input ng-model="product.name" style="width: 100%;" ng-model-onblur/></h3>
 					</div>
 					<div class="panel-body">
-						<img src="http://lorempixel.com/360/240/" class="prod-img" />
+						<img src="http://lorempixel.com/360/240/food" class="prod-img" />
 						<br/>
 						<br/>
 						<div class="btn-group" ng-if="product.price>=0">
-							<div class="btn btn-primary prod-price">{{ product.price }}€</div>
-							<div class="btn btn-default prod-price-total" ng-if="product.amount>1">{{ product.price * product.amount }}€</div>
+							<div class="btn btn-primary prod-price" ng-click="product.price=-1">{{ product.price | number : 2}}€</div>
+							<div class="btn btn-default prod-price-total" ng-if="product.amount>1">{{ product.price * product.amount | number : 2}}€</div>
 						</div>
 						<div class="btn-group" ng-if="product.price<0">
 							<div class="btn btn-primary prod-price"><input ng-model="product.price" size=4 ng-model-onblur/>€</div>
@@ -60,11 +63,21 @@
 					</div>
 				</div>
 			</div>
+			
 			<!-- Add product panel -->
-			<div class="col-md-4 product">
-				<div class="panel panel-default panel-plus" ng-click="products.push({'name':'','amount':1, 'price':-1})">
+			<div class="col-md-4 col-sm-6 product">
+				<div class="panel panel-default panel-plus" ng-click="products.push({'name':'','amount':1, 'price':-1});">
 					<div class="panel-body">
 						<span class="glyphicon glyphicon-plus panel-add-plus"></span>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Get list panel -->
+			<div class="col-md-4 col-sm-6 product">
+				<div class="panel panel-default panel-list">
+					<div class="panel-body">
+						<span class="glyphicon glyphicon-th-list panel-list-list"></span>
 					</div>
 				</div>
 			</div>
